@@ -11,7 +11,7 @@ pr:
       - master-linux
 
 variables:
-  - extensionLink: Plugins to testLink
+  extensionLink: Plugins to testLink
 
 jobs:
   - job: RunWindowsTests
