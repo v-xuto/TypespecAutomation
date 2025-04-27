@@ -12,6 +12,7 @@ pr:
 
 parameters:
   - name: ARTIFACTS-URL
+    defaultName: "artifactsUrl"
     displayName: ARTIFACTS-URL
     type: string
 
