@@ -10,9 +10,10 @@ pr:
       - master
       - master-linux
 
-variables:
-  - name: extensionLink
-    value: Plugins to testLink
+parameters:
+  - name: ARTIFACTS-URL
+    displayName: Plugins to testLink
+    type: string
 
 jobs:
   - job: RunWindowsTests
