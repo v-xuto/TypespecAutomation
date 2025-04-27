@@ -21,15 +21,17 @@ jobs:
     pool:
       vmImage: "windows-latest"
     steps:
+      - script: |
+          echo "Downloading extension from ${{ parameters.ARTIFACTS_URL }}"
+          curl -o extension.vsix ${{ parameters.ARTIFACTS_URL }}
+          ls
+          pwd
+        displayName: "Download Extension"
+
       - task: NodeTool@0
         inputs:
           versionSpec: "20.18.3"
         displayName: "Install Node.js"
-
-      - script: |
-          echo "Downloading extension from ${{ parameters.ARTIFACTS_URL }}"
-          curl -o extension.vsix ${{ parameters.ARTIFACTS_URL }}
-        displayName: "Download Extension"
 
       - script: |
           npm install
