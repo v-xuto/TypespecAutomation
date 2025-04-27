@@ -25,7 +25,10 @@ jobs:
           curl -o extension.zip ${{ parameters.ARTIFACTS_URL }}
           echo "Unzipping extension.zip"
           tar -xf extension.zip
+          echo 'ls'
           ls
+          echo 'dir'
+          dir
         displayName: "Download Extension"
 
       - task: NodeTool@0
