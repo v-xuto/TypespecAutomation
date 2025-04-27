@@ -11,8 +11,8 @@ pr:
       - master-linux
 
 parameters:
-  - name: ARTIFACTS-URL
-    displayName: ARTIFACTS-URL
+  - name: ARTIFACTS_URL
+    displayName: ARTIFACTS_URL
     type: string
     default: "artifactsUrl"
 
@@ -27,8 +27,8 @@ jobs:
         displayName: "Install Node.js"
 
       - script: |
-          echo "Downloading extension from ${{ parameters.ARTIFACTS-URL }}"
-          curl -o extension.vsix ${{ parameters.ARTIFACTS-URL }}
+          echo "Downloading extension from ${{ parameters.ARTIFACTS_URL }}"
+          curl -o extension.vsix ${{ parameters.ARTIFACTS_URL }}
         displayName: "Download Extension"
 
       - script: |
