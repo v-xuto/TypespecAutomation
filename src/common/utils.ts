@@ -65,6 +65,23 @@ const test = baseTest.extend<{
         ].filter((v): v is string => !!v),
       })
       const page = await app.firstWindow()
+      const userSettingsPath = path.join(
+        tempDir,
+        "user-data",
+        "User",
+        "settings.json"
+      )
+      fs.writeFileSync(
+        userSettingsPath,
+        JSON.stringify({
+          "typespec.initTemplatesUrls": [
+            {
+              name: "Azure",
+              url: "https://aka.ms/typespec/azure-init",
+            },
+          ],
+        })
+      )
       // spawn("code", [
       //   "--install-extension",
       //   path.resolve(__dirname, "../../extension.vsix"),

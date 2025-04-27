@@ -10,6 +10,9 @@ pr:
       - master
       - master-linux
 
+variables:
+  - extensionLink: Plugins to testLink
+
 jobs:
   - job: RunWindowsTests
     pool:
@@ -19,6 +22,11 @@ jobs:
         inputs:
           versionSpec: "20.18.3"
         displayName: "Install Node.js"
+
+      - script: |
+          echo "Downloading extension from $EXTENSIONLINK"
+          curl -o extension.vsix $EXTENSIONLINK
+        displayName: "Download Extension"
 
       - script: |
           npm install
