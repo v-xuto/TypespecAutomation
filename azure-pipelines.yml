@@ -24,11 +24,10 @@ jobs:
           echo "Downloading extension from ${{ parameters.ARTIFACTS_URL }}"
           curl -o extension.zip ${{ parameters.ARTIFACTS_URL }}
           echo "Unzipping extension.zip"
-          tar -xf extension.zip
+          echo "Unzipping extension.zip into current directory"
+          powershell -Command "Expand-Archive -Path 'extension.zip' -DestinationPath '.'
           echo 'ls'
           ls
-          echo 'dir'
-          dir
         displayName: "Download Extension"
 
       - task: NodeTool@0
