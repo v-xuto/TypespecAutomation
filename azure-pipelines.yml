@@ -12,9 +12,9 @@ pr:
 
 parameters:
   - name: ARTIFACTS-URL
-    defaultName: "artifactsUrl"
     displayName: ARTIFACTS-URL
     type: string
+    default: "artifactsUrl"
 
 jobs:
   - job: RunWindowsTests
