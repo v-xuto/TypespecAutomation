@@ -2,13 +2,13 @@ trigger:
   branches:
     include:
       - master
-      - master-linux
+      - java_path_config
 
 pr:
   branches:
     include:
       - master
-      - master-linux
+      - java_path_config
 
 jobs:
   - job: RunWindowsTests_2_EmitTypespecProject
