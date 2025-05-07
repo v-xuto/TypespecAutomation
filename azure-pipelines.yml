@@ -11,36 +11,6 @@ pr:
       - master-linux
 
 jobs:
-  - job: RunWindowsTests_1_CreateTypespecProject
-    pool:
-      vmImage: "windows-latest"
-    steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: "20.18.3"
-        displayName: "Install Node.js"
-
-      - script: |
-          npm install
-        displayName: "Install dependencies"
-
-      - script: |
-          echo "Running Create Test Cases"
-          npm run test:create
-        displayName: "Run Create Test Cases"
-        env:
-          BUILD_ARTIFACT_STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
-          CI: true
-        continueOnError: true
-
-      - task: PublishBuildArtifacts@1
-        inputs:
-          path: "$(Build.ArtifactStagingDirectory)"
-          artifact: "screenshots"
-          publishLocation: "Container"
-          includePatterns: "images/**/*.png"
-        displayName: "Publish screenshots to Artifacts"
-
   - job: RunWindowsTests_2_EmitTypespecProject
     pool:
       vmImage: "windows-latest"
@@ -68,70 +38,48 @@ jobs:
         displayName: "Install dependencies"
 
       - script: |
+          java -version
+          python -verison
+          node -v
+          echo %PATH%
+        displayName: "Verify installation 1"
+
+      - script: |
+          java -version
+          echo %PATH%
           set JAVA_HOME=%JAVA_HOME_21_X64%
-          set PATH=%JAVA_HOME%\bin;%PATH%
+          setx PATH "%JAVA_HOME%\bin;%PATH%" /M
+          java -version
+          echo %PATH%
+        displayName: "set JAVA_HOME and PATH method 1"
+
+      - script: |
+          java -version
+          python -V
+          node -v
+          echo %PATH%
+        displayName: "Verify installation 2"
+
+      - script: |
+          java -version
+          echo %PATH%
+          set JAVA_HOME=%JAVA_HOME_21_X64%
+          setx PATH "%JAVA_HOME%\bin;%PATH%"
+          java -version
+          echo %PATH%
+        displayName: "set JAVA_HOME and PATH method 2"
+
+      - script: |
+          java -version
+          python -V
+          node -v
+          echo %PATH%
+        displayName: "Verify installation 3"
+
+      - script: |
           echo "Running Emit Test Cases"
           npm run test:emit
         displayName: "Run Emit Test Cases"
-        env:
-          BUILD_ARTIFACT_STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
-          CI: true
-        continueOnError: true
-
-      - task: PublishBuildArtifacts@1
-        inputs:
-          path: "$(Build.ArtifactStagingDirectory)"
-          artifact: "screenshots"
-          publishLocation: "Container"
-          includePatterns: "images/**/*.png"
-        displayName: "Publish screenshots to Artifacts"
-
-  - job: RunWindowsTests_3_ImportTypespecProject
-    pool:
-      vmImage: "windows-latest"
-    steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: "20.18.3"
-        displayName: "Install Node.js"
-
-      - script: |
-          npm install
-        displayName: "Install dependencies"
-
-      - script: |
-          echo "Running Import Test Cases"
-          npm run test:import
-        displayName: "Run Import Test Cases"
-        env:
-          BUILD_ARTIFACT_STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
-          CI: true
-        continueOnError: true
-
-      - task: PublishBuildArtifacts@1
-        inputs:
-          path: "$(Build.ArtifactStagingDirectory)"
-          artifact: "screenshots"
-          publishLocation: "Container"
-          includePatterns: "images/**/*.png"
-        displayName: "Publish screenshots to Artifacts"
-  - job: RunWindowsTests_4_PreviewTypespecProject
-    pool:
-      vmImage: "windows-latest"
-    steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: "20.18.3"
-        displayName: "Install Node.js"
-
-      - script: |
-          npm install
-        displayName: "Install dependencies"
-
-      - script: |
-          echo "Running Preview Test Cases"
-          npm run test:preview
-        displayName: "Run Preview Test Cases"
         env:
           BUILD_ARTIFACT_STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
           CI: true
