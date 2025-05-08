@@ -10,11 +10,26 @@ pr:
       - master
       - master-linux
 
+parameters:
+  - name: ARTIFACTS_URL
+    displayName: ARTIFACTS_URL
+    type: string
+
 jobs:
   - job: RunWindowsTests_1_CreateTypespecProject
     pool:
       vmImage: "windows-latest"
     steps:
+      - script: |
+          echo "Downloading extension from ${{ parameters.ARTIFACTS_URL }}"
+          curl -o extension.zip ${{ parameters.ARTIFACTS_URL }}
+          echo "Unzipping extension.zip"
+          echo "Unzipping extension.zip into current directory"
+          powershell -Command "Expand-Archive -Path 'extension.zip' -DestinationPath '.'
+          echo 'ls'
+          ls
+        displayName: "Download Extension"
+
       - task: NodeTool@0
         inputs:
           versionSpec: "20.18.3"
