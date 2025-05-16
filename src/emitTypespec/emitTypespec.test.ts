@@ -11,6 +11,7 @@ import {
   emitSelectLanguage,
   emitSelectLanguageForOpenapi,
   emitSelectType,
+  emiChooseEmitter
 } from "../common/emiSteps"
 import { screenShot, sleep, test } from "../common/utils"
 import path from "node:path"
@@ -72,19 +73,12 @@ describe.each(EmitCasesConfigList)("EmitTypespecProject", async (item) => {
     await screenShot.screenShot("emitter_list.png")
 
     await sleep(3)
-    const chooseEmitter = page
-      .getByRole("option", { name: "Choose another emitter" })
-      .locator("a")
-      .first()
-
-    if ((await chooseEmitter.count()) > 0) {
-      await chooseEmitter.click()
-    }
+    await emiChooseEmitter(page)
     await emitSelectType(page, selectType)
     if (selectTypeLanguage === "OpenAPI3") {
       await emitSelectLanguageForOpenapi(page)
     } else {
-      await emitSelectLanguage(page, selectTypeLanguage)
+      await emitSelectLanguage(page, selectTypeLanguage, selectType)
     }
 
     const contrastMessage = selectTypeLanguage + "...Succeeded"
