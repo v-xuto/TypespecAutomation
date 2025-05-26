@@ -36,11 +36,11 @@ beforeEach(() => {
   }
 })
 
-test("PreviewTypespecFromOpenApi3", async ({ launch }) => {
-  screenShot.setDir("PreviewTypespecFromOpenApi3")
+test("PreviewTypespecProject", async ({ launch }) => {
+  screenShot.setDir("PreviewTypespecProject")
   const workspacePath = path.resolve(
     __dirname,
-    "../PreviewTypespecProjectOpenApi3"
+    "../PreviewTypespecProject"
   )
   const { page } = await launch({
     workspacePath,
@@ -52,7 +52,10 @@ test("PreviewTypespecFromOpenApi3", async ({ launch }) => {
   )
   // await installExtension(page)
   console.log("install extension")
-
+  await page
+    .getByRole("treeitem", { name: "main.tsp" })
+    .locator("a")
+    .click()
   await start(page, {
     folderName: "PreviewTypespecProject",
     command: "Preview API Documentation",

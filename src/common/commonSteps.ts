@@ -59,11 +59,12 @@ async function start(
   page: Page,
   { folderName, command }: { folderName: string; command: string }
 ) {
+  await sleep(2)
   await page.locator("li").filter({ hasText: folderName }).first().click()
   console.log("top click")
-
+  await sleep(2)
   // await screenShot.screenShot("open_top_panel.png")
-  await page.getByRole("textbox").first().fill(`>Typespec: ${command}`)
+  await page.getByRole("textbox", {name: "Search files by name (append"}).first().fill(`>Typespec: ${command}`)
   console.log("top input")
 
   let listForCreate: Locator
