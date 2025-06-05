@@ -9,13 +9,13 @@
     "test:create_win": "vitest --root ./src/createTypespec_win",
     "test:emit_win": "vitest --root ./src/emitTypespec_win",
     "test:import_win": "vitest --root ./src/importTypespec_win",
-    "test:preview_win": "vitest --root ./src/previewTypespec_win",
+    "test:preview_win": "vitest --root ./src/previewTypespec",
     "test:all_win": "npm run test:create_win && npm run test:emit_win && npm run test:import_win && npm run test:preview_win",
 
     "test:create_linux": "vitest --root ./src/createTypespec_linux",
     "test:emit_linux": "vitest --root ./src/emitTypespec_linux",
     "test:import_linux": "vitest --root ./src/importTypespec_linux",
-    "test:preview_linux": "vitest --root ./src/previewTypespec_linux",
+    "test:preview_linux": "vitest --root ./src/previewTypespec",
     "test:all_linux": "npm run test:create_linux && npm run test:emit_linux && npm run test:import_linux && npm run test:preview_linux"
   },
   "dependencies": {

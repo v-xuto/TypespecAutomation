@@ -70,7 +70,6 @@ describe.each(PreviewCasesConfigList)("PreviewAPIDocument", async (item) => {
           .contentFrame()
           .locator("html")
           .first()
-
         return (await previewContent.count()) > 0
       },
       "Failed to compilation completed successfully",
