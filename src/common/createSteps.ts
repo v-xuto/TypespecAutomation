@@ -172,7 +172,6 @@ async function inputARMResourceProviderName(page: Page) {
 
 async function startWithClick(page: Page) {
   await screenShot.screenShot("start_with_click.png")
-  await page.getByLabel("Explorer (Ctrl+Shift+E) - 1").nth(2).click()
   await screenShot.screenShot("open_tabs.png")
   await page.getByRole("button", { name: "Create TypeSpec Project" }).click()
 }
