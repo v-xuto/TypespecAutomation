@@ -275,7 +275,7 @@ async function installExtensionForCommand(page: Page, extensionDir: string) {
   await cmd.click()
   await sleep(5)
   await cmd.fill(
-    `code --install-extensions ${vsixPath} --extensions-dir ${extensionDir}`
+    `code --install-extension ${vsixPath} --extensions-dir ${extensionDir}`
   )
   await screenShot.screenShot("start_install_extension.png")
   await page.keyboard.press("Enter")
@@ -288,8 +288,11 @@ async function installExtensionForCommand(page: Page, extensionDir: string) {
   await retry(
     2,
     async () => {
-      // Check if there is Typespec under the 'installed' section
-      const installed = await page.locator('.monaco-list > .monaco-scrollable-element').first().textContent()
+      // Check if there is Typespec in the title name under the 'installed' section
+      const installed = await page.locator('.monaco-list > .monaco-scrollable-element').first()
+        .getByLabel('TypeSpec').locator('div').filter({ hasText: 'TypeSpec'}).first()
+        .locator('span').first()
+        .textContent()
       return installed !== null && installed.includes("TypeSpec")
     },
     `Failed to install the extension.`,
