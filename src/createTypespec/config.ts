@@ -33,30 +33,30 @@ const CreateCasesConfigList: CreateConfigType[] = [
     isEmptyFolder: true,
     expectedResults,
   },
-  // {
-  //   triggerType: CreateProjectTriggerType.Click,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-NonEmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: false,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Command,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-EmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: true,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Command,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-NonEmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: false,
-  //   expectedResults,
-  // },
+  {
+    triggerType: CreateProjectTriggerType.Click,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-NonEmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: false,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Command,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-EmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: true,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Command,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-NonEmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: false,
+    expectedResults,
+  },
 ]
 
 templateName = "Typespec library"
@@ -75,38 +75,38 @@ expectedResults = [
 ]
 
 CreateCasesConfigList.push(
-  // {
-  //   triggerType: CreateProjectTriggerType.Click,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-EmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: true,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Click,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-NonEmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: false,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Command,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-EmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: true,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Command,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-NonEmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: false,
-  //   expectedResults,
-  // }
+  {
+    triggerType: CreateProjectTriggerType.Click,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-EmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: true,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Click,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-NonEmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: false,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Command,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-EmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: true,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Command,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-NonEmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: false,
+    expectedResults,
+  }
 )
 
 templateName = "Typespec emitter"
@@ -124,38 +124,38 @@ expectedResults = [
 ]
 
 CreateCasesConfigList.push(
-  // {
-  //   triggerType: CreateProjectTriggerType.Click,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-EmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: true,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Click,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-NonEmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: false,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Command,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-EmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: true,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Command,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-NonEmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: false,
-  //   expectedResults,
-  // }
+  {
+    triggerType: CreateProjectTriggerType.Click,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-EmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: true,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Click,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-NonEmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: false,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Command,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-EmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: true,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Command,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-NonEmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: false,
+    expectedResults,
+  }
 )
 
 templateName = "(rest-api-spec repo) Azure Data Plane Service Project"
@@ -169,38 +169,38 @@ expectedResults = [
 ]
 
 CreateCasesConfigList.push(
-  // {
-  //   triggerType: CreateProjectTriggerType.Click,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-EmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: true,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Click,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-NonEmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: false,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Command,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-EmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: true,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Command,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-NonEmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: false,
-  //   expectedResults,
-  // }
+  {
+    triggerType: CreateProjectTriggerType.Click,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-EmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: true,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Click,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-NonEmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: false,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Command,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-EmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: true,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Command,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-NonEmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: false,
+    expectedResults,
+  }
 )
 
 templateName = "(rest-api-spec repo) Azure Resource Manager Service Project"
@@ -214,38 +214,38 @@ expectedResults = [
 ]
 
 CreateCasesConfigList.push(
-  // {
-  //   triggerType: CreateProjectTriggerType.Click,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-EmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: true,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Click,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-NonEmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: false,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Command,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-EmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: true,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Command,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-NonEmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: false,
-  //   expectedResults,
-  // }
+  {
+    triggerType: CreateProjectTriggerType.Click,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-EmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: true,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Click,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-NonEmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: false,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Command,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-EmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: true,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Command,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-NonEmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: false,
+    expectedResults,
+  }
 )
 
 templateName = "(stand alone) Azure Data Plane Service Project"
@@ -262,38 +262,38 @@ expectedResults = [
 ]
 
 CreateCasesConfigList.push(
-  // {
-  //   triggerType: CreateProjectTriggerType.Click,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-EmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: true,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Click,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-NonEmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: false,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Command,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-EmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: true,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Command,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-NonEmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: false,
-  //   expectedResults,
-  // }
+  {
+    triggerType: CreateProjectTriggerType.Click,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-EmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: true,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Click,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-NonEmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: false,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Command,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-EmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: true,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Command,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-NonEmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: false,
+    expectedResults,
+  }
 )
 
 templateName = "(stand alone) Azure Resource Manager Service Project"
@@ -310,38 +310,38 @@ expectedResults = [
 ]
 
 CreateCasesConfigList.push(
-  // {
-  //   triggerType: CreateProjectTriggerType.Click,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-EmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: true,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Click,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-NonEmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: false,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Command,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-EmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: true,
-  //   expectedResults,
-  // },
-  // {
-  //   triggerType: CreateProjectTriggerType.Command,
-  //   caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-NonEmptyFolder`,
-  //   templateName,
-  //   templateNameDesctiption,
-  //   isEmptyFolder: false,
-  //   expectedResults,
-  // }
+  {
+    triggerType: CreateProjectTriggerType.Click,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-EmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: true,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Click,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Click}-NonEmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: false,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Command,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-EmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: true,
+    expectedResults,
+  },
+  {
+    triggerType: CreateProjectTriggerType.Command,
+    caseName: `${createCase}-${templateName.replaceAll(" ", "")}-Trigger_${CreateProjectTriggerType.Command}-NonEmptyFolder`,
+    templateName,
+    templateNameDesctiption,
+    isEmptyFolder: false,
+    expectedResults,
+  }
 )
 
 const DataPlaneAPIProviderNameTemplates = [
