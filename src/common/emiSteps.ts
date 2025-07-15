@@ -49,7 +49,7 @@ async function emitSelectType(page: Page, type: string) {
     await page.locator("a").filter({ hasText: /^Server Stub$/}).click()
   } else {
     await screenShot.screenShot("select_emitter_type_error.png")
-    screenShot.save()
+    // 移除这里的 screenShot.save()，统一在测试的 finally 块中保存
     throw new Error("Unsupported emit type")
   }
 }
@@ -150,7 +150,7 @@ async function emitSelectLanguage(page: Page, language: string = "", types: stri
       .click()    
   } else {
     await screenShot.screenShot("select_emitter_type_error.png")
-    screenShot.save()
+    // 移除这里的 screenShot.save()，统一在测试的 finally 块中保存
     throw new Error("Unsupported language")
   }
 }

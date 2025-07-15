@@ -57,9 +57,9 @@ async function selectEmitters(page: Page, emitters?: string[]) {
  * When creating, select template
  * @param page vscode project
  * @param templateName The name of the template that needs to be selected.
- * @param templateNameDesctiption The description of the template that needs to be selected.
+ * @param templateNameDescription The description of the template that needs to be selected.
  */
-async function selectTemplate(page: Page, templateName: string, templateNameDesctiption: string) {
+async function selectTemplate(page: Page, templateName: string, templateNameDescription: string) {
   let templateListName
   let templateListDescription
   await retry(
@@ -76,10 +76,10 @@ async function selectTemplate(page: Page, templateName: string, templateNameDesc
       let templateListBox = page.getByRole("option", { name: templateName}).locator('label')
       let templateListDescriptionArr = await templateListBox.allTextContents();
       templateListDescription = templateListDescriptionArr[0].slice(templateName.length)
-      if (templateNameDesctiption == templateListDescription){
+      if (templateNameDescription == templateListDescription){
         return true
       } else {
-        console.error(`Description mismatched, expected "${templateNameDesctiption}", got "${templateListDescription}".`)
+        console.error(`Description mismatched, expected "${templateNameDescription}", got "${templateListDescription}".`)
         return false
       }
     },

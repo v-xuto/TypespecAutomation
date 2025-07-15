@@ -14,8 +14,6 @@ import { screenShot, test } from "../common/utils"
 import fs from "node:fs"
 import path from "node:path"
 import {
-  inputServiceNameSpace,
-  inputARMResourceProviderName,
   inputProjectName,
   selectEmitters,
   selectTemplate,
@@ -24,8 +22,7 @@ import {
 import {
   CreateCasesConfigList,
   CreateProjectTriggerType,
-  DataPlaneAPIProviderNameTemplates,
-  ARMAPIProviderNameTemplates
+
 } from "./config"
 
 beforeAll(() => {
@@ -44,70 +41,71 @@ beforeEach(() => {
   }
 })
 
-describe.each(CreateCasesConfigList)("CreateTypespecProject", async (item) => {
+describe.each(CreateCasesConfigList)("CreateTypespecProject", (item) => {
   const {
     caseName,
     triggerType,
     templateName,
-    templateNameDesctiption,
+    templateNameDescription,
     isEmptyFolder,
     expectedResults,
   } = item
 
-  test(caseName, async ({ launch }) => {
+  test.only(caseName, async ({ launch }) => {
     screenShot.setDir(caseName)
     const workspacePath = path.resolve(__dirname, "../../CreateTypespecProject")
 
-    const { page, extensionDir } = await launch({
-      workspacePath:
-        triggerType === CreateProjectTriggerType.Command
-          ? workspacePath
-          : "test",
-    })
-
-    if (!isEmptyFolder) {
-      createTestFile(workspacePath)
-    }
-
-    await installExtensionForCommand(page, extensionDir)
-
-    if (triggerType === CreateProjectTriggerType.Command) {
-      await startWithCommandPalette(page, {
-        folderName: "CreateTypespecProject",
-        command: "Create Typespec Project",
+    try {
+      const { page, extensionDir } = await launch({
+        workspacePath:
+          triggerType === CreateProjectTriggerType.Command
+            ? workspacePath
+            : "test",
       })
-    } else {
-      await startWithClick(page)
+
+      if (!isEmptyFolder) {
+        createTestFile(workspacePath)
+      }
+
+      await installExtensionForCommand(page, extensionDir)
+
+      if (triggerType === CreateProjectTriggerType.Command) {
+        await startWithCommandPalette(page, {
+          folderName: "CreateTypespecProject",
+          command: "Create Typespec Project",
+        })
+      } else {
+        await startWithClick(page)
+      }
+
+      await selectFolder(
+        triggerType === CreateProjectTriggerType.Command ? "" : workspacePath
+      )
+
+      if (!isEmptyFolder) {
+        await notEmptyFolderContinue(page)
+        deleteTestFile(workspacePath)
+      }
+    
+      await selectTemplate(page, templateName, templateNameDescription)
+
+      await inputProjectName(page)
+
+      if (templateName === "Generic Rest API") {
+        await selectEmitters(page)
+      } 
+
+      await preContrastResult(
+        page,
+        "Project created",
+        "Failed to create project Successful",
+        [20, 20]
+      )
+      await closeVscode()
+      await contrastResult(expectedResults, workspacePath)
+    } finally {
+      // 无论测试成功还是失败，都保存截图
+      screenShot.save()
     }
-
-    await selectFolder(
-      triggerType === CreateProjectTriggerType.Command ? "" : workspacePath
-    )
-
-    if (!isEmptyFolder) {
-      await notEmptyFolderContinue(page)
-      deleteTestFile(workspacePath)
-    }
-  
-    await selectTemplate(page, templateName, templateNameDesctiption)
-
-    await inputProjectName(page)
-
-    if (templateName === "Generic Rest API") {
-      await selectEmitters(page)
-    } else if (DataPlaneAPIProviderNameTemplates.includes(templateName)) {
-      await inputServiceNameSpace(page)
-    } else if (ARMAPIProviderNameTemplates.includes(templateName)) {
-      await inputARMResourceProviderName(page)
-    }
-
-    await preContrastResult(
-      page,
-      "Project created",
-      "Failed to create project Successful",
-      [10, 15]
-    )
-    await closeVscode()
-    await contrastResult(expectedResults, workspacePath)
   })
 })

@@ -121,7 +121,7 @@ async function retry(
     count--
   }
   await screenShot.screenShot("error.png")
-  screenShot.save()
+  // 移除这里的 screenShot.save()，因为现在在测试的 finally 块中统一保存
   await closeVscode()
   throw new Error(errMessage)
 }
