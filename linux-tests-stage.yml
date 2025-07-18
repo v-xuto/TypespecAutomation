@@ -12,10 +12,7 @@ jobs:
     - script: |
         sudo apt-get update
         sudo apt-get install -y \
-          libgtk-3-0 libxss1 libasound2t64 libnss3 libx11-xcb1 \
-          libxcomposite1 libxrandr2 libxcb-dri3-0 libdrm2 libgbm1 \
-          libxdamage1 libatk-bridge2.0-0 libcups2 libxkbcommon0 \
-          xvfb x11-apps imagemagick x11-utils x11-xserver-utils
+          imagemagick x11-xserver-utils
       displayName: "Install Linux Dependencies"
 
     - script: |
@@ -67,10 +64,8 @@ jobs:
     - script: |
         sudo apt-get update
         sudo apt-get install -y \
-          libgtk-3-0 libxss1 libasound2t64 libnss3 libx11-xcb1 \
-          libxcomposite1 libxrandr2 libxcb-dri3-0 libdrm2 libgbm1 \
-          libxdamage1 libatk-bridge2.0-0 libcups2 libxkbcommon0 \
-          xvfb x11-apps imagemagick x11-utils x11-xserver-utils
+
+          imagemagick x11-xserver-utils
       displayName: "Install Linux Dependencies"
 
     - script: |
@@ -122,10 +117,7 @@ jobs:
     - script: |
         sudo apt-get update
         sudo apt-get install -y \
-          libgtk-3-0 libxss1 libasound2t64 libnss3 libx11-xcb1 \
-          libxcomposite1 libxrandr2 libxcb-dri3-0 libdrm2 libgbm1 \
-          libxdamage1 libatk-bridge2.0-0 libcups2 libxkbcommon0 \
-          xvfb x11-apps imagemagick x11-utils x11-xserver-utils
+          imagemagick x11-xserver-utils
       displayName: "Install Linux Dependencies"
 
     - script: |
@@ -177,10 +169,7 @@ jobs:
     - script: |
         sudo apt-get update
         sudo apt-get install -y \
-          libgtk-3-0 libxss1 libasound2t64 libnss3 libx11-xcb1 \
-          libxcomposite1 libxrandr2 libxcb-dri3-0 libdrm2 libgbm1 \
-          libxdamage1 libatk-bridge2.0-0 libcups2 libxkbcommon0 \
-          xvfb x11-apps imagemagick x11-utils x11-xserver-utils
+          imagemagick x11-xserver-utils
       displayName: "Install Linux Dependencies"
 
     - script: |

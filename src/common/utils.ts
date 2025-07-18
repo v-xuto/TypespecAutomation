@@ -1,11 +1,16 @@
 import { Page, _electron } from "playwright"
 import fs from "node:fs"
 import os from "node:os"
-import path, { resolve } from "node:path"
+import path, { resolve, join } from "node:path"
 import { test as baseTest, inject } from "vitest"
 import screenshot from "screenshot-desktop"
 import moment from "moment"
 import { closeVscode } from "./commonSteps"
+
+const __dirname = import.meta.dirname;
+export const projectRoot = path.resolve(__dirname, "../../");
+export const tempDir = path.resolve(projectRoot, "./temp");
+export const imagesPath = path.resolve(tempDir, "./images-linux");
 
 interface Context {
   page: Page
@@ -24,13 +29,8 @@ type LaunchFixture = (options: {
  */
 const test = baseTest.extend<{
   launch: LaunchFixture
-  taskName: string
-  logPath: string
 }>({
-  taskName: async ({ task }, use) => use(`${task.name}-${task.id}`),
-  logPath: async ({ taskName }, use) =>
-    use(resolve(`./tests-logs-${taskName}.txt`)),
-  launch: async ({ taskName, logPath }, use) => {
+  launch: async ({ task }, use) => {
     const teardowns: (() => Promise<void>)[] = []
 
     await use(async (options) => {
@@ -50,8 +50,6 @@ const test = baseTest.extend<{
         env: {
           ...process.env,
           ...envOverrides,
-          VITEST_VSCODE_E2E_LOG_FILE: logPath,
-          VITEST_VSCODE_LOG: "verbose",
         },
         args: [
           "--no-sandbox",
@@ -66,6 +64,16 @@ const test = baseTest.extend<{
         ].filter((v): v is string => !!v),
       })
       const page = await app.firstWindow()
+      const tracePath = join(projectRoot, "test-results", task.name, "trace.zip");
+      const artifactsDir = join(tempDir, "playwright-artifacts");
+      await fs.promises.mkdir(artifactsDir, { recursive: true }); // make sure the directory exists
+      process.env.TMPDIR = artifactsDir;
+      await page.context().tracing.start({ screenshots: false, snapshots: true, title: task.name });
+      teardowns.push(async () => {
+        try {
+          await page.context().tracing.stop({ path: tracePath });
+        } catch (error) {}
+      });
       const userSettingsPath = path.join(
         tempDir,
         "user-data",
@@ -83,12 +91,6 @@ const test = baseTest.extend<{
           ],
         })
       )
-      // spawn("code", [
-      //   "--install-extension",
-      //   path.resolve(__dirname, "../../extension.vsix"),
-      //   "--extensions-dir",
-      //   path.resolve(tempDir, "extensions"),
-      // ])
       return { page, extensionDir: path.join(tempDir, "extensions") }
     })
 
