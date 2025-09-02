@@ -83,12 +83,6 @@ const test = baseTest.extend<{
           ],
         })
       )
-      // spawn("code", [
-      //   "--install-extension",
-      //   path.resolve(__dirname, "../../extension.vsix"),
-      //   "--extensions-dir",
-      //   path.resolve(tempDir, "extensions"),
-      // ])
       return { page, extensionDir: path.join(tempDir, "extensions") }
     })
 

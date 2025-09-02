@@ -256,16 +256,8 @@ async function installExtensionForCommand(page: Page, extensionDir: string) {
     process.env.VSIX_PATH || path.resolve(__dirname, "../../extension.vsix")
   await sleep(5)
   await page.keyboard.press("Control+Backquote")
+  await page.getByRole("textbox", { name: /Terminal/ }).first().waitFor({ state: 'visible', timeout: 10000 })
   await screenShot.screenShot("open_terminal.png")
-  await retry(
-    10,
-    async () => {
-      const cmd = page.getByRole("textbox", { name: /Terminal/ }).first()
-      return (await cmd.count()) > 0
-    },
-    "Failed to find command palette",
-    3
-  )
   const cmd = page.getByRole("textbox", { name: /Terminal/ }).first()
   await cmd.click()
   await sleep(2)
