@@ -1,7 +1,7 @@
 import { Page, _electron } from "playwright"
 import fs from "node:fs"
 import os from "node:os"
-import path, { resolve } from "node:path"
+import path from "node:path"
 import { test as baseTest, inject } from "vitest"
 import screenshot from "screenshot-desktop"
 import moment from "moment"
@@ -24,15 +24,8 @@ type LaunchFixture = (options: {
  */
 const test = baseTest.extend<{
   launch: LaunchFixture
-  taskName: string
-  logPath: string
 }>({
-  taskName: async ({ task }, use) => use(`${task.name}-${task.id}`),
-  logPath: async ({ taskName }, use) =>
-    use(resolve(`./tests-logs-${taskName}.txt`)),
-  launch: async ({ taskName, logPath }, use) => {
-    const teardowns: (() => Promise<void>)[] = []
-
+  launch: async ({}, use) => {
     await use(async (options) => {
       const executablePath = inject("executablePath")
       const workspacePath = options.workspacePath
@@ -50,8 +43,6 @@ const test = baseTest.extend<{
         env: {
           ...process.env,
           ...envOverrides,
-          VITEST_VSCODE_E2E_LOG_FILE: logPath,
-          VITEST_VSCODE_LOG: "verbose",
         },
         args: [
           "--no-sandbox",
@@ -91,8 +82,6 @@ const test = baseTest.extend<{
       // ])
       return { page, extensionDir: path.join(tempDir, "extensions") }
     })
-
-    for (const teardown of teardowns) await teardown()
   },
 })
 
