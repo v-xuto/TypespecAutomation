@@ -58,9 +58,9 @@ async function startWithCommandPalette(
   page: Page,
   { folderName, command }: { folderName: string; command: string }
 ) {
-  await sleep(2)
-  await page.locator("li").filter({ hasText: folderName }).first().click()
-  await sleep(2)
+  const folderItem = page.locator("li").filter({ hasText: folderName }).first();
+  await folderItem.waitFor({ state: "visible", timeout: 10000 });
+  await folderItem.click();
   await screenShot.screenShot("open_top_panel.png")
   await page
     .getByRole("textbox", { name: "Search files by name (append" })
@@ -97,7 +97,10 @@ async function startWithRightClick(page: Page, command: string, type?: string) {
     const target = page.getByRole("treeitem", { name: "main.tsp" }).locator("a")
     await target.click({ button: "right" })
     await screenShot.screenShot("click_main.png")
-    await page.getByRole("menuitem", { name: command }).click()
+    const menuItem = page.getByRole("menuitem", { name: command });
+    await menuItem.waitFor({ state: "visible", timeout: 10000 });
+    await menuItem.waitFor({ state: "attached", timeout: 10000 });
+    await menuItem.click();
     await screenShot.screenShot(
       `${command == "Emit from TypeSpec" ? "emit" : "preview"}_typespec.png`
     )
