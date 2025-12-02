@@ -319,6 +319,7 @@ async function installExtensionForCommand(page: Page, extensionDir: string) {
     await retry(
       2,
       async () => {
+        await page.pause();
         const installed = page.locator('.xterm-decoration').first()
         return (await installed.count()) > 0
       },
