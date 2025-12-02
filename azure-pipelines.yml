@@ -18,6 +18,14 @@ parameters:
     type: boolean
     default: true
 
+resources:
+  repositories:
+    - repository: externalRepo
+      type: github
+      name: v-xuto/TypespecAutomation
+      endpoint: xuto_pat
+      ref: wenjie-dev
+      
 stages:
   - stage: WindowsTests
     condition: eq('${{ parameters.runWindows }}', true)
@@ -25,6 +33,7 @@ stages:
       - template: windows-tests-stage.yml
 
   - stage: LinuxTests
+    dependsOn: []
     condition: eq('${{ parameters.runLinux }}', true)
     jobs:
       - template: linux-tests-stage.yml
