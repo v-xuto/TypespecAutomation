@@ -100,7 +100,8 @@ async function startWithRightClick(page: Page, command: string, type?: string) {
       async () => {
         await target.click({ button: "right" });
         const menuContainer = page.locator('.monaco-menu-container');
-        return (await menuContainer.count()) > 0 && await menuContainer.isVisible();
+        await menuContainer.waitFor({ state: "visible", timeout: 10000 });
+        return (await menuContainer.count()) > 0;
       },
       "Failed to open context menu",
       1
@@ -112,7 +113,7 @@ async function startWithRightClick(page: Page, command: string, type?: string) {
     await retry(
       5,
       async () => {
-        await menuItem.waitFor({ state: "visible", timeout: 2000 });
+        await menuItem.waitFor({ state: "visible", timeout: 10000 });
         await menuItem.click();
         return true;
       },
