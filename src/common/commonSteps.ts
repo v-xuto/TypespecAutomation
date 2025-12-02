@@ -319,13 +319,13 @@ async function installExtensionForCommand(page: Page, extensionDir: string) {
     await retry(
       2,
       async () => {
-        await page.pause();
         const installed = page.locator('.xterm-decoration').first()
         return (await installed.count()) > 0
       },
       `Failed to install the extension.`,
       1
     )
+    await sleep(1);
   }
   await screenShot.screenShot("start_install_extension_result.png")
 }

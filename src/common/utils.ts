@@ -103,11 +103,13 @@ async function retry(
   gap: number = 2
 ) {
   while (count > 0) {
-    await sleep(gap)
     if (await fn()) {
-      return
+      return;
     }
-    count--
+    count--;
+    if (count > 0) {
+      await sleep(gap);
+    }
   }
   await screenShot.screenShot("error.png")
   screenShot.save()
