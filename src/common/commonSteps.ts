@@ -96,14 +96,23 @@ async function startWithRightClick(page: Page, command: string, type?: string) {
   ) {
     const target = page.getByRole("treeitem", { name: "main.tsp" }).locator("a")
     await target.waitFor({ state: "visible", timeout: 10000 });
-    await target.click({ button: "right" })
+    await retry(
+      5,
+      async () => {
+        await target.click({ button: "right" });
+        const menuContainer = page.locator('.monaco-menu-container');
+        return (await menuContainer.count()) > 0 && await menuContainer.isVisible();
+      },
+      "Failed to open context menu",
+      1
+    );
 
     await screenShot.screenShot("click_main.png")
 
     const menuItem = page.getByRole("menuitem", { name: command });
     await menuItem.waitFor({ state: "visible", timeout: 10000 });
     await menuItem.click();
-    
+
     await screenShot.screenShot(
       `${command == "Emit from TypeSpec" ? "emit" : "preview"}_typespec.png`
     )
