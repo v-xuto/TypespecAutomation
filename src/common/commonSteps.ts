@@ -76,7 +76,6 @@ async function startWithCommandPalette(
         .first()
       
       if ((await listForCreate.count()) === 0) {
-        await page.pause()
         await page.getByRole("textbox", { name: "Type the name of a command to" }).first().fill('');
         await page
           .getByRole("textbox", { name: "Search files by name (append" })
