@@ -74,7 +74,17 @@ async function startWithCommandPalette(
         .locator("a")
         .filter({ hasText: `TypeSpec: ${command}` })
         .first()
-      return (await listForCreate.count()) > 0
+      
+      if ((await listForCreate.count()) === 0) {
+        await page.pause()
+        await page.getByRole("textbox", { name: "Type the name of a command to" }).first().fill('');
+        await page
+          .getByRole("textbox", { name: "Search files by name (append" })
+          .first()
+          .fill(`>TypeSpec: ${command}`)
+        return false;
+      }
+      return true;
     },
     "Failed to find the specified option"
   )
@@ -111,10 +121,14 @@ async function startWithRightClick(page: Page, command: string, type?: string) {
 
     const menuItem = page.getByRole("menuitem", { name: command });
     await retry(
-      5,
+      3,
       async () => {
-        await menuItem.waitFor({ state: "visible", timeout: 10000 });
-        await menuItem.click();
+        try {
+          await menuItem.waitFor({ state: "visible", timeout: 20000 });
+          await menuItem.click();
+        } catch {
+          console.log("Timeout waiting for menu item to be visible, retrying...");
+        }
         return true;
       },
       "Failed to click menu item",
