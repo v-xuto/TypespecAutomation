@@ -24,8 +24,8 @@ resources:
       type: github
       name: v-xuto/TypespecAutomation
       endpoint: xuto_pat
-      ref: wenjie-dev
-      
+      ref: wenjie-dev0
+
 stages:
   - stage: WindowsTests
     condition: eq('${{ parameters.runWindows }}', true)
