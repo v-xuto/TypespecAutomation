@@ -110,7 +110,7 @@ async function startWithRightClick(page: Page, command: string, type?: string) {
     await target.click({ button: "right" })
     await screenShot.screenShot("openapi.3.0.png")
     if (os.platform() == "linux"){
-      await sleep(3)
+      await page.getByRole("menuitem", { name: "Import TypeSpec from OpenAPI" }).waitFor({ state: "visible", timeout: 10000 });
     }
     await page
       .getByRole("menuitem", { name: "Import TypeSpec from OpenAPI" })
@@ -262,13 +262,16 @@ async function installExtensionForFile(page: Page, fullFilePath: string) {
  */
 async function installExtensionForCommand(page: Page, extensionDir: string) {
   const vsixPath = path.resolve(__dirname, "../../extension.vsix")
-  await sleep(8)
   await page.keyboard.press("Control+Backquote")
   await retry(
     10,
     async () => {
       const cmd = page.getByRole('tab', { name: 'Terminal (Ctrl+`)' })
-      return (await cmd.count()) > 0
+      if ((await cmd.count()) === 0) {
+        await page.keyboard.press("Control+Backquote");
+        return false;
+      }
+      return true;
     },
     "Failed to find terminal tab",
     1

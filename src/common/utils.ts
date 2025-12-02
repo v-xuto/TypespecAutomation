@@ -177,7 +177,6 @@ class Screenshot {
   }
 
   async screenShot(fileName: string) {
-    await sleep(3)
     let img = await screenshot()
     let buffer = Buffer.from(img)
     let rootDir =
