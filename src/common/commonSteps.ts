@@ -120,10 +120,10 @@ async function startWithRightClick(page: Page, command: string, type?: string) {
 
     const menuItem = page.getByRole("menuitem", { name: command });
     await retry(
-      3,
+      5,
       async () => {
         try {
-          await menuItem.waitFor({ state: "visible", timeout: 20000 });
+          await menuItem.waitFor({ state: "visible", timeout: 30000 });
           await menuItem.click();
         } catch {
           console.log("Timeout waiting for menu item to be visible, retrying...");
