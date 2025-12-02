@@ -95,7 +95,6 @@ async function startWithRightClick(page: Page, command: string, type?: string) {
     command == "Preview API Documentation"
   ) {
     const target = page.getByRole("treeitem", { name: "main.tsp" }).locator("a")
-    await target.waitFor({ state: "visible", timeout: 10000 });
     await retry(
       5,
       async () => {
@@ -110,8 +109,16 @@ async function startWithRightClick(page: Page, command: string, type?: string) {
     await screenShot.screenShot("click_main.png")
 
     const menuItem = page.getByRole("menuitem", { name: command });
-    await menuItem.waitFor({ state: "visible", timeout: 10000 });
-    await menuItem.click();
+    await retry(
+      5,
+      async () => {
+        await menuItem.waitFor({ state: "visible", timeout: 2000 });
+        await menuItem.click();
+        return true;
+      },
+      "Failed to click menu item",
+      1
+    );
 
     await screenShot.screenShot(
       `${command == "Emit from TypeSpec" ? "emit" : "preview"}_typespec.png`
