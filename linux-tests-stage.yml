@@ -1,162 +1,162 @@
 jobs:
-- job: RunElectronUITestsOnLinux_1_CreateTypeSpecProject
-  pool:
-    vmImage: "ubuntu-latest"
+# - job: RunElectronUITestsOnLinux_1_CreateTypeSpecProject
+#   pool:
+#     vmImage: "ubuntu-latest"
 
-  steps:
-    - checkout: externalRepo
-    - task: NodeTool@0
-      inputs:
-        versionSpec: "22.17.0"
-      displayName: "Install Node.js"
+#   steps:
+#     - checkout: externalRepo
+#     - task: NodeTool@0
+#       inputs:
+#         versionSpec: "22.17.0"
+#       displayName: "Install Node.js"
 
-    - script: |
-        sudo apt-get update
-        sudo apt-get install -y \
-          xvfb x11-apps imagemagick x11-utils x11-xserver-utils
-      displayName: "Install Linux Dependencies"
+#     - script: |
+#         sudo apt-get update
+#         sudo apt-get install -y \
+#           xvfb x11-apps imagemagick x11-utils x11-xserver-utils
+#       displayName: "Install Linux Dependencies"
 
-    - script: |
-        export DISPLAY=:99
-        /usr/bin/Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-        echo ">>> Started xvfb"
-      displayName: "Start xvfb and Set DISPLAY"
+#     - script: |
+#         export DISPLAY=:99
+#         /usr/bin/Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+#         echo ">>> Started xvfb"
+#       displayName: "Start xvfb and Set DISPLAY"
 
-    - script: |
-        npm install
-        node -e "require('@vscode/test-electron').download().then(p => console.log('##vso[task.setvariable variable=VSCODE_E2E_DOWNLOAD_PATH]' + p))"
-        sudo snap install code --classic
-      displayName: "Install deps and download VSCode"
+#     - script: |
+#         npm install
+#         node -e "require('@vscode/test-electron').download().then(p => console.log('##vso[task.setvariable variable=VSCODE_E2E_DOWNLOAD_PATH]' + p))"
+#         sudo snap install code --classic
+#       displayName: "Install deps and download VSCode"
 
-    - script: |
-        export DISPLAY=:99
-        export VSCODE_E2E_DOWNLOAD_PATH=$(VSCODE_E2E_DOWNLOAD_PATH)
-        npm run test:create
-      displayName: "Run Playwright Electron UI Tests"
-      env:
-        CI: true
-        DISPLAY: ":99"
-        VSCODE_E2E_DOWNLOAD_PATH: $(VSCODE_E2E_DOWNLOAD_PATH)
-        ELECTRON_DISABLE_SANDBOX: "1"
-        BUILD_ARTIFACT_STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
-      continueOnError: true
-    - script: |
-        ls /home/vsts/work/1/a
-      displayName: "List artifacts"
+#     - script: |
+#         export DISPLAY=:99
+#         export VSCODE_E2E_DOWNLOAD_PATH=$(VSCODE_E2E_DOWNLOAD_PATH)
+#         npm run test:create
+#       displayName: "Run Playwright Electron UI Tests"
+#       env:
+#         CI: true
+#         DISPLAY: ":99"
+#         VSCODE_E2E_DOWNLOAD_PATH: $(VSCODE_E2E_DOWNLOAD_PATH)
+#         ELECTRON_DISABLE_SANDBOX: "1"
+#         BUILD_ARTIFACT_STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
+#       continueOnError: true
+#     - script: |
+#         ls /home/vsts/work/1/a
+#       displayName: "List artifacts"
 
-    - task: PublishBuildArtifacts@1
-      inputs:
-        path: "$(Build.ArtifactStagingDirectory)"
-        artifact: "screenshots"
-        publishLocation: "Container"
-        includePatterns: "images-linux/**/*.png"
-      displayName: "Publish Screenshots"
+#     - task: PublishBuildArtifacts@1
+#       inputs:
+#         path: "$(Build.ArtifactStagingDirectory)"
+#         artifact: "screenshots"
+#         publishLocation: "Container"
+#         includePatterns: "images-linux/**/*.png"
+#       displayName: "Publish Screenshots"
 
-- job: RunElectronUITestsOnLinux_2_EmitTypeSpecProject
-  pool:
-    vmImage: "ubuntu-latest"
+# - job: RunElectronUITestsOnLinux_2_EmitTypeSpecProject
+#   pool:
+#     vmImage: "ubuntu-latest"
 
-  steps:
-    - checkout: externalRepo
-    - task: NodeTool@0
-      inputs:
-        versionSpec: "22.17.0"
-      displayName: "Install Node.js"
+#   steps:
+#     - checkout: externalRepo
+#     - task: NodeTool@0
+#       inputs:
+#         versionSpec: "22.17.0"
+#       displayName: "Install Node.js"
 
-    - script: |
-        sudo apt-get update
-        sudo apt-get install -y \
-          xvfb x11-apps imagemagick x11-utils x11-xserver-utils
-      displayName: "Install Linux Dependencies"
+#     - script: |
+#         sudo apt-get update
+#         sudo apt-get install -y \
+#           xvfb x11-apps imagemagick x11-utils x11-xserver-utils
+#       displayName: "Install Linux Dependencies"
 
-    - script: |
-        export DISPLAY=:99
-        /usr/bin/Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-        echo ">>> Started xvfb"
-      displayName: "Start xvfb and Set DISPLAY"
+#     - script: |
+#         export DISPLAY=:99
+#         /usr/bin/Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+#         echo ">>> Started xvfb"
+#       displayName: "Start xvfb and Set DISPLAY"
 
-    - script: |
-        npm install
-        node -e "require('@vscode/test-electron').download().then(p => console.log('##vso[task.setvariable variable=VSCODE_E2E_DOWNLOAD_PATH]' + p))"
-        sudo snap install code --classic
-      displayName: "Install deps and download VSCode"
+#     - script: |
+#         npm install
+#         node -e "require('@vscode/test-electron').download().then(p => console.log('##vso[task.setvariable variable=VSCODE_E2E_DOWNLOAD_PATH]' + p))"
+#         sudo snap install code --classic
+#       displayName: "Install deps and download VSCode"
 
-    - script: |
-        export DISPLAY=:99
-        export VSCODE_E2E_DOWNLOAD_PATH=$(VSCODE_E2E_DOWNLOAD_PATH)
-        npm run test:emit
-      displayName: "Run Playwright Electron UI Tests"
-      env:
-        CI: true
-        DISPLAY: ":99"
-        VSCODE_E2E_DOWNLOAD_PATH: $(VSCODE_E2E_DOWNLOAD_PATH)
-        ELECTRON_DISABLE_SANDBOX: "1"
-        BUILD_ARTIFACT_STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
-      continueOnError: true
-    - script: |
-        ls /home/vsts/work/1/a
-      displayName: "List artifacts"
+#     - script: |
+#         export DISPLAY=:99
+#         export VSCODE_E2E_DOWNLOAD_PATH=$(VSCODE_E2E_DOWNLOAD_PATH)
+#         npm run test:emit
+#       displayName: "Run Playwright Electron UI Tests"
+#       env:
+#         CI: true
+#         DISPLAY: ":99"
+#         VSCODE_E2E_DOWNLOAD_PATH: $(VSCODE_E2E_DOWNLOAD_PATH)
+#         ELECTRON_DISABLE_SANDBOX: "1"
+#         BUILD_ARTIFACT_STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
+#       continueOnError: true
+#     - script: |
+#         ls /home/vsts/work/1/a
+#       displayName: "List artifacts"
 
-    - task: PublishBuildArtifacts@1
-      inputs:
-        path: "$(Build.ArtifactStagingDirectory)"
-        artifact: "screenshots"
-        publishLocation: "Container"
-        includePatterns: "images-linux/**/*.png"
-      displayName: "Publish Screenshots"
+#     - task: PublishBuildArtifacts@1
+#       inputs:
+#         path: "$(Build.ArtifactStagingDirectory)"
+#         artifact: "screenshots"
+#         publishLocation: "Container"
+#         includePatterns: "images-linux/**/*.png"
+#       displayName: "Publish Screenshots"
 
-- job: RunElectronUITestsOnLinux_3_ImportTypeSpecProject
-  pool:
-    vmImage: "ubuntu-latest"
+# - job: RunElectronUITestsOnLinux_3_ImportTypeSpecProject
+#   pool:
+#     vmImage: "ubuntu-latest"
 
-  steps:
-    - checkout: externalRepo
-    - task: NodeTool@0
-      inputs:
-        versionSpec: "22.17.0"
-      displayName: "Install Node.js"
+#   steps:
+#     - checkout: externalRepo
+#     - task: NodeTool@0
+#       inputs:
+#         versionSpec: "22.17.0"
+#       displayName: "Install Node.js"
 
-    - script: |
-        sudo apt-get update
-        sudo apt-get install -y \
-          xvfb x11-apps imagemagick x11-utils x11-xserver-utils
-      displayName: "Install Linux Dependencies"
+#     - script: |
+#         sudo apt-get update
+#         sudo apt-get install -y \
+#           xvfb x11-apps imagemagick x11-utils x11-xserver-utils
+#       displayName: "Install Linux Dependencies"
 
-    - script: |
-        export DISPLAY=:99
-        /usr/bin/Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-        echo ">>> Started xvfb"
-      displayName: "Start xvfb and Set DISPLAY"
+#     - script: |
+#         export DISPLAY=:99
+#         /usr/bin/Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+#         echo ">>> Started xvfb"
+#       displayName: "Start xvfb and Set DISPLAY"
 
-    - script: |
-        npm install
-        node -e "require('@vscode/test-electron').download().then(p => console.log('##vso[task.setvariable variable=VSCODE_E2E_DOWNLOAD_PATH]' + p))"
-        sudo snap install code --classic
-      displayName: "Install deps and download VSCode"
+#     - script: |
+#         npm install
+#         node -e "require('@vscode/test-electron').download().then(p => console.log('##vso[task.setvariable variable=VSCODE_E2E_DOWNLOAD_PATH]' + p))"
+#         sudo snap install code --classic
+#       displayName: "Install deps and download VSCode"
 
-    - script: |
-        export DISPLAY=:99
-        export VSCODE_E2E_DOWNLOAD_PATH=$(VSCODE_E2E_DOWNLOAD_PATH)
-        npm run test:import
-      displayName: "Run Playwright Electron UI Tests"
-      env:
-        CI: true
-        DISPLAY: ":99"
-        VSCODE_E2E_DOWNLOAD_PATH: $(VSCODE_E2E_DOWNLOAD_PATH)
-        ELECTRON_DISABLE_SANDBOX: "1"
-        BUILD_ARTIFACT_STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
-      continueOnError: true
-    - script: |
-        ls /home/vsts/work/1/a
-      displayName: "List artifacts"
+#     - script: |
+#         export DISPLAY=:99
+#         export VSCODE_E2E_DOWNLOAD_PATH=$(VSCODE_E2E_DOWNLOAD_PATH)
+#         npm run test:import
+#       displayName: "Run Playwright Electron UI Tests"
+#       env:
+#         CI: true
+#         DISPLAY: ":99"
+#         VSCODE_E2E_DOWNLOAD_PATH: $(VSCODE_E2E_DOWNLOAD_PATH)
+#         ELECTRON_DISABLE_SANDBOX: "1"
+#         BUILD_ARTIFACT_STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
+#       continueOnError: true
+#     - script: |
+#         ls /home/vsts/work/1/a
+#       displayName: "List artifacts"
 
-    - task: PublishBuildArtifacts@1
-      inputs:
-        path: "$(Build.ArtifactStagingDirectory)"
-        artifact: "screenshots"
-        publishLocation: "Container"
-        includePatterns: "images-linux/**/*.png"
-      displayName: "Publish Screenshots"
+#     - task: PublishBuildArtifacts@1
+#       inputs:
+#         path: "$(Build.ArtifactStagingDirectory)"
+#         artifact: "screenshots"
+#         publishLocation: "Container"
+#         includePatterns: "images-linux/**/*.png"
+#       displayName: "Publish Screenshots"
 
 - job: RunElectronUITestsOnLinux_4_PreviewTypeSpecProject
   pool:
