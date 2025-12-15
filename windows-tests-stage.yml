@@ -41,7 +41,7 @@ jobs:
       - task: UseDotNet@2
         inputs:
           packageType: "sdk"
-          version: "9.0.305"
+          version: "10.x"
         displayName: "Install .NET SDK"
 
       - script: |
