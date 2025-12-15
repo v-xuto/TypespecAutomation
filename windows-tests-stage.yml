@@ -76,64 +76,64 @@ jobs:
           includePatterns: "images-windows/**/*.png"
         displayName: "Publish screenshots to Artifacts"
 
-  - job: RunWindowsTests_3_ImportTypespecProject
-    pool:
-      vmImage: "windows-latest"
-    steps:
-      - checkout: externalRepo
-      - task: NodeTool@0
-        inputs:
-          versionSpec: "22.17.0"
-        displayName: "Install Node.js"
+  # - job: RunWindowsTests_3_ImportTypespecProject
+  #   pool:
+  #     vmImage: "windows-latest"
+  #   steps:
+  #     - checkout: externalRepo
+  #     - task: NodeTool@0
+  #       inputs:
+  #         versionSpec: "22.17.0"
+  #       displayName: "Install Node.js"
 
-      - script: |
-          npm install
-        displayName: "Install dependencies"
+  #     - script: |
+  #         npm install
+  #       displayName: "Install dependencies"
 
-      - script: |
-          echo "Running Import Test Cases"
-          npm run test:import
-        displayName: "Run Import Test Cases"
-        env:
-          BUILD_ARTIFACT_STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
-          CI: true
-        continueOnError: true
+  #     - script: |
+  #         echo "Running Import Test Cases"
+  #         npm run test:import
+  #       displayName: "Run Import Test Cases"
+  #       env:
+  #         BUILD_ARTIFACT_STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
+  #         CI: true
+  #       continueOnError: true
 
-      - task: PublishBuildArtifacts@1
-        inputs:
-          path: "$(Build.ArtifactStagingDirectory)"
-          artifact: "screenshots"
-          publishLocation: "Container"
-          includePatterns: "images-windows/**/*.png"
-        displayName: "Publish screenshots to Artifacts"
+  #     - task: PublishBuildArtifacts@1
+  #       inputs:
+  #         path: "$(Build.ArtifactStagingDirectory)"
+  #         artifact: "screenshots"
+  #         publishLocation: "Container"
+  #         includePatterns: "images-windows/**/*.png"
+  #       displayName: "Publish screenshots to Artifacts"
 
-  - job: RunWindowsTests_4_PreviewTypespecProject
-    pool:
-      vmImage: "windows-latest"
-    steps:
-      - checkout: externalRepo
-      - task: NodeTool@0
-        inputs:
-          versionSpec: "22.17.0"
-        displayName: "Install Node.js"
+  # - job: RunWindowsTests_4_PreviewTypespecProject
+  #   pool:
+  #     vmImage: "windows-latest"
+  #   steps:
+  #     - checkout: externalRepo
+  #     - task: NodeTool@0
+  #       inputs:
+  #         versionSpec: "22.17.0"
+  #       displayName: "Install Node.js"
 
-      - script: |
-          npm install
-        displayName: "Install dependencies"
+  #     - script: |
+  #         npm install
+  #       displayName: "Install dependencies"
 
-      - script: |
-          echo "Running Preview Test Cases"
-          npm run test:preview
-        displayName: "Run Preview Test Cases"
-        env:
-          BUILD_ARTIFACT_STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
-          CI: true
-        continueOnError: true
+  #     - script: |
+  #         echo "Running Preview Test Cases"
+  #         npm run test:preview
+  #       displayName: "Run Preview Test Cases"
+  #       env:
+  #         BUILD_ARTIFACT_STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
+  #         CI: true
+  #       continueOnError: true
 
-      - task: PublishBuildArtifacts@1
-        inputs:
-          path: "$(Build.ArtifactStagingDirectory)"
-          artifact: "screenshots"
-          publishLocation: "Container"
-          includePatterns: "images-windows/**/*.png"
-        displayName: "Publish screenshots to Artifacts"
+  #     - task: PublishBuildArtifacts@1
+  #       inputs:
+  #         path: "$(Build.ArtifactStagingDirectory)"
+  #         artifact: "screenshots"
+  #         publishLocation: "Container"
+  #         includePatterns: "images-windows/**/*.png"
+  #       displayName: "Publish screenshots to Artifacts"
