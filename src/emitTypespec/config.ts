@@ -11,7 +11,7 @@ type EmitConfigType = {
     expectedResults: string[]
 }
 
-const EmitcaseName = `EmitTypespecProject`
+// const EmitcaseName = `EmitTypespecProject`
 const EmitCasesConfigList: EmitConfigType[] = []
 
 EmitCasesConfigList.push(
@@ -112,7 +112,7 @@ EmitCasesConfigList.push(
         selectTypeLanguage: "JavaScript",
         triggerType: EmitProjectTriggerType.Click,
         expectedResults: ["http-server-js"],
-    },
+    }
 )
 
 export { EmitCasesConfigList }
