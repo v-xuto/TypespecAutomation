@@ -17,7 +17,7 @@
     "@types/screenshot-desktop": "^1.12.3",
     "@typespec/compiler": "1.10.0",
     "@typespec/http": "1.10.0",
-    "@typespec/http-client-csharp": "1.0.0-alpha.20260313.1",
+    "@typespec/http-client-csharp": "1.0.0-alpha.20260320.2",
     "@typespec/http-client-java": "0.6.1",
     "@typespec/http-client-js": "0.14.1",
     "@typespec/http-client-python": "0.28.0",
