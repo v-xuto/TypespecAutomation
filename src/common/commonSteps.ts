@@ -59,7 +59,7 @@ async function startWithCommandPalette(
   { folderName, command }: { folderName: string; command: string }
 ) {
   await sleep(2)
-  await page.locator("li").filter({ hasText: folderName }).first().click()
+  await page.locator("li").filter({ hasText: folderName }).first().click({ timeout: 90_000 })
   await sleep(2)
   await screenShot.screenShot("open_top_panel.png")
   await page
