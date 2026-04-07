@@ -63,7 +63,6 @@ describe.each(EmitCasesConfigList)("EmitTypespecProject", async (item) => {
     await installExtensionForCommand(page, extensionDir)
     if (triggerType === "Command") {
       await startWithCommandPalette(page, {
-        folderName: "EmitTypespecProject",
         command: "Emit from Typespec",
       })
     } else if (triggerType === "Click") {

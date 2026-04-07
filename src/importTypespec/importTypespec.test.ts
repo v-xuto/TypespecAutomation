@@ -74,7 +74,6 @@ describe.each(ImportCasesConfigList) ("ImportTypespecFromOpenApi3", async ( item
 
     if (triggerType === "CommandPalette") {
       await startWithCommandPalette(page, {
-        folderName: "ImportTypespecProjectOpenApi3",
         command: "Import TypeSpec from Openapi 3",
       })
     } else if (triggerType === "RightClickOnFile") {

@@ -73,7 +73,6 @@ describe.each(CreateCasesConfigList)("CreateTypespecProject", async (item) => {
 
     if (triggerType === CreateProjectTriggerType.Command) {
       await startWithCommandPalette(page, {
-        folderName: "CreateTypespecProject",
         command: "Create Typespec Project",
       })
     } else {

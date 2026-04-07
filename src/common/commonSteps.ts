@@ -50,16 +50,15 @@ async function contrastResult(res: string[], dir: string) {
 /**
  * All cases need to execute the steps. Click the top input box and enter the command
  * @param page vscode object
- * @param {folderName, command}
- * folderName: The text in the top input box is usually the current open root directory,
+ * @param {command}
  * command: After the top input box pops up, the command to be executed
  */
 async function startWithCommandPalette(
   page: Page,
-  { folderName, command }: { folderName: string; command: string }
+  { command }: { command: string }
 ) {
   await sleep(2)
-  await page.locator("li").filter({ hasText: folderName }).first().click({ timeout: 90_000 })
+  await page.getByRole("button", { name: 'Open Quick Access' }).first().click()
   await sleep(2)
   await screenShot.screenShot("open_top_panel.png")
   await page
