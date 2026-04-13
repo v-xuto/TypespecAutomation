@@ -10,7 +10,7 @@ jobs:
         displayName: "Install Node.js"
 
       - script: |
-          npm install
+          npm ci
         displayName: "Install dependencies"
 
       - script: |
@@ -54,7 +54,7 @@ jobs:
         displayName: "Install Maven"
 
       - script: |
-          npm install
+          npm ci
         displayName: "Install dependencies"
 
       - script: |
@@ -87,7 +87,7 @@ jobs:
         displayName: "Install Node.js"
 
       - script: |
-          npm install
+          npm ci
         displayName: "Install dependencies"
 
       - script: |
@@ -118,7 +118,7 @@ jobs:
         displayName: "Install Node.js"
 
       - script: |
-          npm install
+          npm ci
         displayName: "Install dependencies"
 
       - script: |

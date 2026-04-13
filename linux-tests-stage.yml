@@ -23,7 +23,7 @@ jobs:
       displayName: "Start xvfb and Set DISPLAY"
 
     - script: |
-        npm install
+        npm ci
         node -e "require('@vscode/test-electron').download().then(p => console.log('##vso[task.setvariable variable=VSCODE_E2E_DOWNLOAD_PATH]' + p))"
         sudo snap install code --classic
       displayName: "Install deps and download VSCode"
@@ -76,7 +76,7 @@ jobs:
       displayName: "Start xvfb and Set DISPLAY"
 
     - script: |
-        npm install
+        npm ci
         node -e "require('@vscode/test-electron').download().then(p => console.log('##vso[task.setvariable variable=VSCODE_E2E_DOWNLOAD_PATH]' + p))"
         sudo snap install code --classic
       displayName: "Install deps and download VSCode"
@@ -129,7 +129,7 @@ jobs:
       displayName: "Start xvfb and Set DISPLAY"
 
     - script: |
-        npm install
+        npm ci
         node -e "require('@vscode/test-electron').download().then(p => console.log('##vso[task.setvariable variable=VSCODE_E2E_DOWNLOAD_PATH]' + p))"
         sudo snap install code --classic
       displayName: "Install deps and download VSCode"
@@ -182,7 +182,7 @@ jobs:
       displayName: "Start xvfb and Set DISPLAY"
 
     - script: |
-        npm install
+        npm ci
         node -e "require('@vscode/test-electron').download().then(p => console.log('##vso[task.setvariable variable=VSCODE_E2E_DOWNLOAD_PATH]' + p))"
         sudo snap install code --classic
       displayName: "Install deps and download VSCode"
