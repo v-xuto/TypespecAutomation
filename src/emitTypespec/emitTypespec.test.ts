@@ -29,6 +29,8 @@ beforeEach(() => {
       const filePath = path.resolve(dir, file)
       fs.rmSync(filePath, { recursive: true, force: true })
     }
+  } else {
+    fs.mkdirSync(dir, { recursive: true })
   }
   dir = path.resolve(__dirname, "../../EmitTypespecProjectStubJs/tsp-output")
   if (fs.existsSync(dir)) {
@@ -36,6 +38,8 @@ beforeEach(() => {
       const filePath = path.resolve(dir, file)
       fs.rmSync(filePath, { recursive: true, force: true })
     }
+  } else {
+    fs.mkdirSync(dir, { recursive: true })
   }
 })
 
