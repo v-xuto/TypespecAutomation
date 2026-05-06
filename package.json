@@ -12,6 +12,7 @@
     "test:preview": "vitest --root ./src/previewTypespec"
   },
   "dependencies": {
+    "@azure-tools/typespec-client-generator-core": "0.67.4",
     "@nut-tree-fork/nut-js": "^4.2.6",
     "@types/node": "^20.12.8",
     "@types/screenshot-desktop": "^1.12.3",
