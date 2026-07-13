@@ -25,8 +25,7 @@ type LaunchFixture = (options: {
 const test = baseTest.extend<{
   launch: LaunchFixture
 }>({
-  launch: async ({ }, use) => {
-    let app: Awaited<ReturnType<typeof _electron.launch>> | undefined
+  launch: async ({}, use) => {
     await use(async (options) => {
       const executablePath = inject("executablePath")
       const workspacePath = options.workspacePath
@@ -39,7 +38,7 @@ const test = baseTest.extend<{
         path.join(os.tmpdir(), "typespec-automation")
       )
 
-      app = await _electron.launch({
+      const app = await _electron.launch({
         executablePath,
         env: {
           ...process.env,
@@ -83,7 +82,6 @@ const test = baseTest.extend<{
       // ])
       return { page, extensionDir: path.join(tempDir, "extensions") }
     })
-    await app?.close()
   },
 })
 
@@ -132,7 +130,11 @@ async function retry(
 class Screenshot {
   private createType: "create" | "emit" | "import" | "preview" = "create"
   private currentDir = ""
-  private fileIndex = 0
+  private fileList: {
+    fullPath: string
+    buffer: Buffer
+    date: number
+  }[] = []
   private typeMenu = {
     create: "CreateTypeSpecProject",
     emit: "EmitFromTypeSpec",
@@ -145,31 +147,60 @@ class Screenshot {
   }
 
   save() {
-    // no-op: screenshots are written to disk immediately in screenShot()
+    if (this.fileList.length === 0) {
+      return
+    }
+    // Smaller dates are placed first to keep the files in order
+    this.fileList.sort((a, b) => a.date - b.date)
+    for (let i = 0; i < this.fileList.length; i++) {
+      const fullPathItem = this.fileList[i].fullPath.split("\\")
+      if (os.platform() === "win32") {
+        fullPathItem[fullPathItem.length - 1] = `${i}_${
+          fullPathItem[fullPathItem.length - 1]
+        }`
+      } else {
+        const lastSlashIdx = fullPathItem[fullPathItem.length - 1].lastIndexOf("/")
+        const fileName = fullPathItem[fullPathItem.length - 1];
+        if (lastSlashIdx !== -1) {
+          const prefix = fileName.substring(0, lastSlashIdx + 1);
+          const suffix = fileName.substring(lastSlashIdx + 1);
+          fullPathItem[fullPathItem.length - 1] = `${prefix}${i}_${suffix}`;
+        } else {
+          fullPathItem[fullPathItem.length - 1] = `${i}_${fileName}`;
+        }
+      }
+      fs.mkdirSync(path.dirname(path.join(...fullPathItem)), {
+        recursive: true,
+      })
+      fs.writeFileSync(path.join(...fullPathItem), this.fileList[i].buffer)
+    }
   }
 
   async screenShot(fileName: string) {
     await sleep(3)
-    const img = await screenshot()
-    const rootDir =
+    let img = await screenshot()
+    let buffer = Buffer.from(img)
+    let rootDir =
       process.env.BUILD_ARTIFACT_STAGING_DIRECTORY ||
       path.resolve(__dirname, "../..")
     const platformDir = os.platform() === "win32" ? "/images-windows" : "/images-linux"
-    const indexedFileName = `${this.fileIndex++}_${fileName}`
     const fullPath = path.join(
       rootDir,
       platformDir,
       this.typeMenu[this.createType],
       this.currentDir,
-      indexedFileName
+      fileName
     )
-    fs.mkdirSync(path.dirname(fullPath), { recursive: true })
-    fs.writeFileSync(fullPath, Buffer.from(img))
+    this.fileList.push({
+      fullPath,
+      buffer,
+      date: +new Date(),
+    })
   }
 
   setDir(dir: string) {
     this.currentDir = dir + moment().format("_HH_mm_ss")
-    this.fileIndex = 0
+    this.fileList = []
   }
 
   getDir() {
