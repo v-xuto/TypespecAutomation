@@ -108,7 +108,7 @@ async function startWithRightClick(page: Page, command: string, type?: string) {
     const target = page.getByRole("treeitem", { name: targetName }).locator("a")
     await target.click({ button: "right" })
     await screenShot.screenShot("openapi.3.0.png")
-    if (os.platform() == "linux") {
+    if (os.platform() == "linux"){
       await sleep(3)
     }
     await page
@@ -123,9 +123,9 @@ async function startWithRightClick(page: Page, command: string, type?: string) {
  * @param file When selecting a file, just pass it in. If you need to select a folder, you do not need to pass this parameter in.
  */
 async function selectFolder(file: string = "") {
-  await sleep(30)
+  await sleep(20)
   await keyboard.type(file)
-  if (os.platform() === "win32"
+  if (os.platform() === "win32" 
     && file.includes("CreateTypespecProject")
   ) {
     await sleep(2)
@@ -151,8 +151,8 @@ async function notEmptyFolderContinue(page: Page) {
     5,
     async () => {
       yesBtn = page.locator("a").filter({ hasText: "Yes" }).first()
-      let noBtn = page.locator("a").filter({ hasText: "No" }).first()
-      return (await yesBtn.count() > 0) && (await noBtn.count() > 0)
+      let noBtn = page.locator("a").filter({ hasText: "No" }).first() 
+      return (await yesBtn.count() > 0) && (await noBtn.count() > 0) 
     },
     "Failed to find yes/no button",
     1
@@ -288,7 +288,7 @@ async function installExtensionForCommand(page: Page, extensionDir: string) {
   )
   await screenShot.screenShot("start_install_extension.png")
   await page.keyboard.press("Enter")
-  if (os.platform() === "win32") {
+  if (os.platform() === "win32"){
     await retry(
       2,
       async () => {
