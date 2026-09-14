@@ -16,8 +16,7 @@
     "@alloy-js/core": "0.23.1",
     "@alloy-js/csharp": "0.23.0",
     "@alloy-js/typescript": "0.23.0",
-    "@alloy-js/msbuild": "0.23.0",
-    "@typespec/http-canonicalization": "0.16.2"
+    "@alloy-js/msbuild": "0.23.0"
   },
   "dependencies": {
     "@azure-tools/typespec-azure-core": "^0.69.0",
